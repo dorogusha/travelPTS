@@ -1,0 +1,14 @@
+# PROD-requirements
+
+aiohttp==3.0.0b0
+urllib3==1.22
+SQLAlchemy==1.2.6
+asyncpgsa==0.20.1
+alembic==0.9.9
+raven==6.6.0
+uvloop==0.9.1
+aiohttp_swagger==1.0.5
+marshmallow==2.15.0
+aiocache==0.8.0
+aiohttp-jinja2==0.15.0
+psycopg2
