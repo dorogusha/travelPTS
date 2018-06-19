@@ -4,7 +4,7 @@ from controller import Category
 
 # list of a routes in application and it's handlers
 routes = [
-    (METH_GET,      '/category',    Category)
+    (METH_GET,      '/category/{ids}',    Category)
 ]
 
 

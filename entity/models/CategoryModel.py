@@ -15,18 +15,12 @@ class CategoryModel(BaseModel):
             entity_cls=Category,
             all_fields=(
                 'id',
-                'name',
+                'label',
+                'description',
+                'flags',
+                'creater_id',
                 'created_at',
                 'updated_at',
             ),
             select_fields=select_fields
         )
-
-
-    # GET Users
-    async def get_entities(self) -> tuple:
-        # result vars
-        result = [1, 2, 3]
-        errors = []
-
-        return result, errors

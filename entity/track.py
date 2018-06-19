@@ -21,9 +21,12 @@ class Track(Base, BaseEntity):
     # categories
     categories = Column(ARRAY(types.JSON), nullable=True)
     # Creater id
-    creater_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    creater_id = Column(Integer, ForeignKey('Users.id', ondelete='CASCADE'), nullable=False)
     # time created
     created_at = Column(Integer, default=int(datetime.now().timestamp()))
     # time updated
     updated_at = Column(Integer, default=int(datetime.now().timestamp()), onupdate=int(datetime.now().timestamp()))
 
+    __table_args__ = (
+        UniqueConstraint('label'),
+    )

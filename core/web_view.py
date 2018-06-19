@@ -34,7 +34,7 @@ class ExtendedApiView(web.View):
     @property
     # list params for generate from str (,) to list
     def _def_params_names(self) -> tuple:
-        return self.KEY_API_IDS, 'fields',
+        return self.KEY_API_IDS, 'fields', 'label', 'name', 'description'
 
     @property
     # schema for validate def params

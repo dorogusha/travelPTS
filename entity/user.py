@@ -19,7 +19,7 @@ class User(Base, BaseEntity):
     email = Column(String(30))
     # access flags
     flags = Column(Integer, default=0)
-    # data
+    # user settings
     data = Column(types.JSON)
     # time created
     created_at = Column(Integer, default=int(datetime.now().timestamp()))

@@ -132,7 +132,7 @@ class BaseModel:
         return []
 
     # GET Entities - default method (by ids)
-    async def get_entities(self, ids: list, **kwargs) -> tuple:
+    async def get_entities(self, ids: list, filter_name: str=None, **kwargs) -> tuple:
         # result success
         result = []
         # result errors
@@ -143,19 +143,13 @@ class BaseModel:
 
         # condition by selector ids/all
         if ids:
-            # check permissions for fleets by account
-            entity_items = await self.entity_cls.select_where(
-                cls_fields=[self.entity_cls.id],
-                conditions=[
-                    self.entity_cls.id == any_(ids)
-                ]
-            )
-            # get allowed entity-ids and errors by selector ids
-            allowed_ids, errs = self.get_allowed_ids_by_list(all_ids=ids, items=entity_items)
-            # add ids-errors in all errors
-            errors.extend(errs)
+            #TODO check permissions for user
             # add allowed_ids in conditions
-            conditions.append(self.entity_cls.id == any_(allowed_ids))
+            conditions.append(self.entity_cls.id == any_(ids))
+
+        # condition by selector name
+        if filter_name:
+            conditions.append(self.entity_cls.label.contains(filter_name))
 
         # select by conditions
         records = await self.entity_cls.select_where(
@@ -227,7 +221,7 @@ class BaseModel:
 
         # condition by selector id
         if id:
-            # TODO check permissions for entity & session user by fleet_id
+            # TODO check permissions for entity & session user
             # find item in database
             entity_item = await self.entity_cls.select_where(
                 cls_fields=[self.entity_cls.id],
