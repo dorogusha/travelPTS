@@ -1,23 +1,25 @@
 from sqlalchemy.sql import any_
 from settings import logger
 from .BaseModel import BaseModel
-from entity.category import Category
+from entity.user import User
 
 
 # business-model by entity User
-class CategoryModel(BaseModel):
+class UserModel(BaseModel):
     def __init__(self, select_fields: set=set()):
         """
         :param select_fields: set, list fields for result
         """
         super().__init__(
-            entity_cls=Category,
+            entity_cls=User,
             all_fields=(
                 'id',
-                'label',
+                'name',
                 'description',
+                'password',
+                'email',
                 'flags',
-                'creater_id',
+                'data',
                 'created_at',
                 'updated_at',
             ),

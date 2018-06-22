@@ -1,10 +1,12 @@
 from aiohttp.hdrs import METH_GET, METH_PUT, METH_ANY, METH_POST
 from controller import Category
+from controller import User
 
 
 # list of a routes in application and it's handlers
 routes = [
-    (METH_GET,      '/category/{ids}',    Category)
+    (METH_GET,      '/category/{ids}',    Category),
+    (METH_POST,     '/user',          User)
 ]
 
 
