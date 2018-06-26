@@ -43,3 +43,12 @@ class TrackCreateSchema(EntityCreateSchema):
 
 class TrackSchema(TrackCreateSchema):
     id = fields.Integer()
+
+
+class PointCreateSchema(EntityCreateSchema):
+    label = fields.String(length=100)
+    creater_id = fields.Integer()
+
+
+class PointSchema(TrackCreateSchema):
+    id = fields.Integer()
