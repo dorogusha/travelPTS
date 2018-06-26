@@ -47,14 +47,23 @@ class ExtendedApiView(web.View):
 
     # generate get-params by _params_to_list
     def _get_def_request_params(self):
+        #  result get-params
         params = {}
         # get def params
         for param_name in self._def_params_names:
-            p = self.request.match_info.get(param_name, '') or self.request.rel_url.query.get(param_name, '')
-            if p == self.KEY_API_SELECT_ALL:
-                params[param_name] = []
-            else:
-                params[param_name] = p.split(',') if p else []
+            # if isset param in shema
+            if param_name in self._params_schema.fields:
+                # get-param by name
+                p = self.request.match_info.get(param_name, '') or self.request.rel_url.query.get(param_name, '')
+                # if param = all
+                if p == self.KEY_API_SELECT_ALL:
+                    params[param_name] = []
+                else:
+                    # calc param by shema.type (list or not)
+                    if type(self._params_schema.fields[param_name]) == fields.List:
+                        params[param_name] = p.split(',') if p else []
+                    elif p:
+                        params[param_name] = p
 
         # apply schema
         params_loaded = self._apply_params_schema(params)

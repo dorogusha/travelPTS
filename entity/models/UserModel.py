@@ -1,5 +1,6 @@
 from sqlalchemy.sql import any_
 from settings import logger
+from entity.validators import UserCreateSchema, UserSchema
 from .BaseModel import BaseModel
 from entity.user import User
 
@@ -25,3 +26,11 @@ class UserModel(BaseModel):
             ),
             select_fields=select_fields
         )
+
+    # Schema for create
+    def _get_create_schema(self):
+        return UserCreateSchema()
+
+    # Schema for update
+    def _get_update_schema(self):
+        return UserSchema()

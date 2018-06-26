@@ -1,24 +1,26 @@
 from sqlalchemy.sql import any_
 from settings import logger
-from entity.validators import CategoryCreateSchema, CategorySchema
+from entity.validators import TrackCreateSchema, TrackSchema
 from .BaseModel import BaseModel
-from entity.category import Category
+from entity.track import Track
 
 
 # business-model by entity User
-class CategoryModel(BaseModel):
+class UserModel(BaseModel):
     def __init__(self, select_fields: set=set()):
         """
         :param select_fields: set, list fields for result
         """
         super().__init__(
-            entity_cls=Category,
+            entity_cls=User,
             all_fields=(
                 'id',
-                'label',
+                'name',
                 'description',
+                'password',
+                'email',
                 'flags',
-                'creater_id',
+                'data',
                 'created_at',
                 'updated_at',
             ),
@@ -27,8 +29,8 @@ class CategoryModel(BaseModel):
 
     # Schema for create
     def _get_create_schema(self):
-        return CategoryCreateSchema()
+        return UserCreateSchema()
 
     # Schema for update
     def _get_update_schema(self):
-        return CategorySchema()
+        return UserSchema()

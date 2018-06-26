@@ -16,10 +16,6 @@ class Track(Base, BaseEntity):
     description = Column(String(length=200))
     # access flags
     flags = Column(Integer, default=0)
-    # points
-    points = Column(ARRAY(types.JSON), nullable=True)
-    # categories
-    categories = Column(ARRAY(types.JSON), nullable=True)
     # Creater id
     creater_id = Column(Integer, ForeignKey('Users.id', ondelete='CASCADE'), nullable=False)
     # time created
@@ -29,4 +25,38 @@ class Track(Base, BaseEntity):
 
     __table_args__ = (
         UniqueConstraint('label'),
+    )
+
+
+# Entity TrackPoints
+class TrackPoints(Base, BaseEntity):
+    __tablename__ = 'TrackPoints'
+
+    # id
+    id = Column(Integer, primary_key=True)
+    # Tag id
+    track_id = Column(Integer, ForeignKey('Tracks.id'), nullable=False)
+    # Unit id
+    point_id = Column(Integer, ForeignKey('Points.id'), nullable=False)
+
+    __table_args__ = (
+        # unique tag-unit
+        UniqueConstraint('track_id', 'point_id'),
+    )
+
+
+# Entity TrackCategories
+class TrackCategories(Base, BaseEntity):
+    __tablename__ = 'TrackCategories'
+
+    # id
+    id = Column(Integer, primary_key=True)
+    # Tag id
+    track_id = Column(Integer, ForeignKey('Tracks.id'), nullable=False)
+    # Unit id
+    category_id = Column(Integer, ForeignKey('Categories.id'), nullable=False)
+
+    __table_args__ = (
+        # unique tag-unit
+        UniqueConstraint('track_id', 'category_id'),
     )

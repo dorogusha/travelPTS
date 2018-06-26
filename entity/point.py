@@ -16,8 +16,6 @@ class Point(Base, BaseEntity):
     description = Column(String(length=200))
     # access flags
     flags = Column(Integer, default=0)
-    # categories
-    categories = Column(ARRAY(types.JSON), nullable=True)
     # Creater id
     creater_id = Column(Integer, ForeignKey('Users.id', ondelete='CASCADE'), nullable=False)
     # time created
@@ -27,4 +25,21 @@ class Point(Base, BaseEntity):
 
     __table_args__ = (
         UniqueConstraint('label'),
+    )
+
+
+# Entity PointCategories
+class PointCategories(Base, BaseEntity):
+    __tablename__ = 'PointCategories'
+
+    # id
+    id = Column(Integer, primary_key=True)
+    # Tag id
+    point_id = Column(Integer, ForeignKey('Points.id'), nullable=False)
+    # Unit id
+    category_id = Column(Integer, ForeignKey('Categories.id'), nullable=False)
+
+    __table_args__ = (
+        # unique tag-unit
+        UniqueConstraint('point_id', 'category_id'),
     )

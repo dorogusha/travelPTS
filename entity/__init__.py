@@ -5,6 +5,6 @@
 # import Entities
 from .user import User
 from .category import Category
-from .point import Point
-from .track import Track
+from .point import Point, PointCategories
+from .track import Track, TrackCategories, TrackPoints
 
