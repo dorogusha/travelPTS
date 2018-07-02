@@ -18,6 +18,7 @@ class TrackModel(BaseModel):
                 'label',
                 'description',
                 'flags',
+                # 'points',
                 'creater_id',
                 'created_at',
                 'updated_at',

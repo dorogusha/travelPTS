@@ -14,6 +14,10 @@ class Point(Base, BaseEntity):
     label = Column(String(200))
     # description
     description = Column(String(length=200))
+    # coordinates
+    position = Column(types.JSON, nullable=False)
+    # location
+    location = Column(String(length=200), nullable=False)
     # access flags
     flags = Column(Integer, default=0)
     # Creater id

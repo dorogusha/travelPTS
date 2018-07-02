@@ -34,3 +34,22 @@ class UserModel(BaseModel):
     # Schema for update
     def _get_update_schema(self):
         return UserSchema()
+
+    # CREATE Entity
+    async def create_entity(self, data: dict, **kwargs) -> tuple:
+        # crypt code
+        if data.get(User.password.name):
+            data[User.password.name] = User.p_encrypt(data[User.password.name])
+        result, errors = await super().create_entity(data, **kwargs)
+
+        return result, errors
+
+    # UPDATE Entity
+    async def update_entity(self, data: dict, **kwargs) -> tuple:
+        # crypt code
+        if data.get(User.password.name):
+            data[User.password.name] = User.p_encrypt(data[User.password.name])
+        # update
+        result, errors = await super().update_entity(data, **kwargs)
+
+        return result, errors

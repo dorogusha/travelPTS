@@ -47,6 +47,8 @@ class TrackSchema(TrackCreateSchema):
 
 class PointCreateSchema(EntityCreateSchema):
     label = fields.String(length=100)
+    position = fields.Dict()
+    location = fields.String(length=200)
     creater_id = fields.Integer()
 
 

@@ -22,7 +22,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=100), nullable=True),
     sa.Column('description', sa.String(length=200), nullable=True),
-    sa.Column('password', sa.String(length=30), nullable=False),
+    sa.Column('password', sa.String(length=100), nullable=False),
     sa.Column('email', sa.String(length=30), nullable=True),
     sa.Column('flags', sa.Integer(), nullable=True),
     sa.Column('data', sa.JSON(), nullable=True),

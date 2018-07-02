@@ -2,10 +2,15 @@ from aiohttp.hdrs import METH_GET, METH_PUT, METH_ANY, METH_POST, METH_DELETE
 from controller import Category
 from controller import User
 from controller import Point
+from controller import Login
+from controller import Logout
 
 
 # list of a routes in application and it's handlers
 routes = [
+    (METH_POST,     '/login',            Login),
+    (METH_POST,     '/logout',           Logout),
+
     (METH_GET,      '/category/{ids}',      Category),
     (METH_POST,     '/category',            Category),
     (METH_PUT,      '/category',            Category),

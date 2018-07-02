@@ -17,6 +17,8 @@ class PointModel(BaseModel):
                 'id',
                 'label',
                 'description',
+                'position',
+                'location',
                 'flags',
                 'creater_id',
                 'created_at',

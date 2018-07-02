@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, types, Boolean, ForeignKey, DateTime, DATETIME, UniqueConstraint
 from datetime import datetime
 from .base import Base, BaseEntity
+from hashlib import md5
 
 
 # Entity Category
@@ -14,7 +15,7 @@ class User(Base, BaseEntity):
     # description
     description = Column(String(length=200))
     # password
-    password = Column(String(30), nullable=False)
+    password = Column(String(100), nullable=False)
     # email
     email = Column(String(30))
     # access flags
@@ -29,3 +30,8 @@ class User(Base, BaseEntity):
     __table_args__ = (
         UniqueConstraint('name'),
     )
+
+    @classmethod
+    # encrypt (for password)
+    def p_encrypt(cls, val: str) -> str:
+        return md5(val.encode('utf-8')).hexdigest()
