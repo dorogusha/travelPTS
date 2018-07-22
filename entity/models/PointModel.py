@@ -27,7 +27,7 @@ class PointModel(BaseModel):
             select_fields=select_fields
         )
 
-    # Schema for create
+    # Schema for create point
     def _get_create_schema(self):
         return PointCreateSchema()
 
